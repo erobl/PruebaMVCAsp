@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_B45818Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="64" />
+    <Property Name="Telefono1" Type="char" MaxLength="10" />
+    <Property Name="Telefono2" Type="char" MaxLength="10" />
+    <Property Name="Cuenta1" Type="char" MaxLength="10" />
+    <Property Name="Cuenta2" Type="char" MaxLength="10" />
+    <Property Name="Cuenta3" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityContainer Name="BD_B45818ModelStoreContainer">
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

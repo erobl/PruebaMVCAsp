@@ -1,0 +1,61 @@
+﻿@model WebApplication1.Models.ModeloIntermedio
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre Completo: 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.Nombre)
+            @Html.Raw(" ")
+            @Html.DisplayFor(model => model.modeloCliente.Apellido1)
+            @Html.Raw(" ")
+            @Html.DisplayFor(model => model.modeloCliente.Apellido2)
+        </dd>
+        <dt>
+            Cedula: 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.Cedula)
+        </dd>
+        <dt>
+            Direccion: 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.modeloCliente.Direccion)
+        </dd>
+        <dt>
+            Telefonos: 
+        </dt>
+        <dd>
+            @for(int i = 0; i < Model.listaTelefonos.Count; i++)
+            {
+                @Html.DisplayFor(model => model.listaTelefonos.ElementAt(i).Numero)
+                <br />
+            }
+        </dd>
+        <dt>
+            Cuentas de Banco:
+        </dt>
+        <dd>
+            @for(int i = 0; i < Model.listaCuenta.Count; i++)
+            {
+                @Html.Raw("<b>Numero: </b>")
+                @Html.DisplayFor(model => model.listaCuenta.ElementAt(i).Numero)
+                @Html.Raw("<br /><b>Tipo: </b>")
+                @Html.DisplayFor(model => model.listaCuenta.ElementAt(i).Numero)
+                <br />
+            }
+        </dd>
+    </dl>
+
+</div>

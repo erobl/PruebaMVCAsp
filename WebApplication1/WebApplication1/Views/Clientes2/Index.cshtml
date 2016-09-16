@@ -1,0 +1,71 @@
+﻿@model WebApplication1.Models.ModeloIntermedio
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Apellido 1
+        </th>
+        <th>
+            Telefonos
+        </th>
+        <th>
+            Cuentas
+        </th>
+        <th></th>
+    </tr>
+@for(int i = 0; i < Model.listaClientes.Count; i++)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelItem => Model.listaClientes.ElementAt(i).Nombre)</td>
+        <td>@Html.DisplayFor(modelItem => Model.listaClientes.ElementAt(i).Apellido1)</td>
+        <td>
+        @for (int j = 0; j < Model.listaTelefonos.Count; j++)
+        {
+            if (Model.listaTelefonos.ElementAt(j).Cedula.Equals(Model.listaClientes.ElementAt(i).Cedula)) {
+                @Html.DisplayFor(modelItem=>Model.listaTelefonos.ElementAt(j).Numero)
+                @Html.Raw(" ")
+            }
+                
+        }
+        </td>
+        <td>
+            @for (int j = 0; j < Model.listaCuenta.Count; j++)
+            {
+                if (Model.listaCuenta.ElementAt(j).Cedula.Equals(Model.listaClientes.ElementAt(i).Cedula)) {
+                    @Html.DisplayFor(modelItem => Model.listaCuenta.ElementAt(j).Numero)
+                    @Html.Raw(" ")
+                }
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new
+{
+    id =
+Model.listaClientes.ElementAt(i).Cedula
+}) |
+            @Html.ActionLink("Details", "Details", new
+       {
+           id =
+Model.listaClientes.ElementAt(i).Cedula
+       }) |
+            @Html.ActionLink("Delete", "Delete", new
+       {
+           id =
+Model.listaClientes.ElementAt(i).Cedula
+       })
+        </td>
+
+    </tr>
+}

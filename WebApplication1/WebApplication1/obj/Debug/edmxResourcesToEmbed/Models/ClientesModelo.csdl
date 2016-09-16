@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_B45818Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
+    <Property Name="Telefono1" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Telefono2" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Cuenta1" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Cuenta2" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Cuenta3" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="BD_B45818Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+  </EntityContainer>
+</Schema>

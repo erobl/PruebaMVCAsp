@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_B45818Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="64" />
+    <Property Name="Apellido1" Type="varchar" MaxLength="64" />
+    <Property Name="Apellido2" Type="varchar" MaxLength="64" />
+    <Property Name="Correo" Type="varchar" MaxLength="64" />
+    <Property Name="Direccion" Type="varchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="Numero" />
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Tipo" Type="varchar" MaxLength="20" />
+    <Property Name="Numero" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Telefono">
+    <Key>
+      <PropertyRef Name="Numero" />
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Numero" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Cuenta__Cedula__48CFD27E">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Telefono__Cedula__45F365D3">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="Telefono">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_B45818ModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cuenta__Cedula__48CFD27E" Association="Self.FK__Cuenta__Cedula__48CFD27E">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Telefono__Cedula__45F365D3" Association="Self.FK__Telefono__Cedula__45F365D3">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Telefono" EntitySet="Telefono" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
