@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="BD_B45818Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cliente">
     <Key>
       <PropertyRef Name="Cedula" />
@@ -10,6 +27,7 @@
     <Property Name="Apellido2" Type="varchar" MaxLength="64" />
     <Property Name="Correo" Type="varchar" MaxLength="64" />
     <Property Name="Direccion" Type="varchar" MaxLength="256" />
+    <Property Name="Usuario" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="Cuenta">
     <Key>
@@ -28,7 +46,21 @@
     <Property Name="Numero" Type="varchar" MaxLength="20" />
     <Property Name="Cedula" Type="varchar" MaxLength="15" />
   </EntityType>
-  <Association Name="FK__Cuenta__Cedula__2C3393D0">
+  <Association Name="FK__Cliente__Usuario__49C3F6B7">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cuenta__Cedula__4F7CD00D">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
@@ -42,7 +74,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Telefono__Cedula__29572725">
+  <Association Name="FK__Telefono__Cedula__4CA06362">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
@@ -57,14 +89,19 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="BD_B45818ModelStoreContainer">
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Cuenta__Cedula__2C3393D0" Association="Self.FK__Cuenta__Cedula__2C3393D0">
+    <AssociationSet Name="FK__Cliente__Usuario__49C3F6B7" Association="Self.FK__Cliente__Usuario__49C3F6B7">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cuenta__Cedula__4F7CD00D" Association="Self.FK__Cuenta__Cedula__4F7CD00D">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Cuenta" EntitySet="Cuenta" />
     </AssociationSet>
-    <AssociationSet Name="FK__Telefono__Cedula__29572725" Association="Self.FK__Telefono__Cedula__29572725">
+    <AssociationSet Name="FK__Telefono__Cedula__4CA06362" Association="Self.FK__Telefono__Cedula__4CA06362">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Telefono" EntitySet="Telefono" />
     </AssociationSet>

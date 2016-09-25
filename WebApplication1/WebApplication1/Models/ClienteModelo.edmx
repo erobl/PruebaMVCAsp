@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BD_B45818Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="Cedula" />
@@ -15,6 +32,7 @@
           <Property Name="Apellido2" Type="varchar" MaxLength="64" />
           <Property Name="Correo" Type="varchar" MaxLength="64" />
           <Property Name="Direccion" Type="varchar" MaxLength="256" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -33,7 +51,21 @@
           <Property Name="Numero" Type="varchar" MaxLength="20" />
           <Property Name="Cedula" Type="varchar" MaxLength="15" />
         </EntityType>
-        <Association Name="FK__Cuenta__Cedula__2C3393D0">
+        <Association Name="FK__Cliente__Usuario__49C3F6B7">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__Cedula__4F7CD00D">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -47,7 +79,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Telefono__Cedula__29572725">
+        <Association Name="FK__Telefono__Cedula__4CA06362">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -62,14 +94,19 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BD_B45818ModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Cuenta__Cedula__2C3393D0" Association="Self.FK__Cuenta__Cedula__2C3393D0">
+          <AssociationSet Name="FK__Cliente__Usuario__49C3F6B7" Association="Self.FK__Cliente__Usuario__49C3F6B7">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__Cedula__4F7CD00D" Association="Self.FK__Cuenta__Cedula__4F7CD00D">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Cuenta" EntitySet="Cuenta" />
           </AssociationSet>
-          <AssociationSet Name="FK__Telefono__Cedula__29572725" Association="Self.FK__Telefono__Cedula__29572725">
+          <AssociationSet Name="FK__Telefono__Cedula__4CA06362" Association="Self.FK__Telefono__Cedula__4CA06362">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Telefono" EntitySet="Telefono" />
           </AssociationSet>
@@ -79,18 +116,41 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BD_B45818Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BD_B45818Entities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="BD_B45818Model.AspNetUsers" />
           <EntitySet Name="Cliente" EntityType="BD_B45818Model.Cliente" />
           <EntitySet Name="Cuenta" EntityType="BD_B45818Model.Cuenta" />
           <EntitySet Name="Telefono" EntityType="BD_B45818Model.Telefono" />
-          <AssociationSet Name="FK__Cuenta__Cedula__2C3393D0" Association="BD_B45818Model.FK__Cuenta__Cedula__2C3393D0">
+          <AssociationSet Name="FK__Cliente__Usuario__49C3F6B7" Association="BD_B45818Model.FK__Cliente__Usuario__49C3F6B7">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__Cedula__4F7CD00D" Association="BD_B45818Model.FK__Cuenta__Cedula__4F7CD00D">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Cuenta" EntitySet="Cuenta" />
           </AssociationSet>
-          <AssociationSet Name="FK__Telefono__Cedula__29572725" Association="BD_B45818Model.FK__Telefono__Cedula__29572725">
+          <AssociationSet Name="FK__Telefono__Cedula__4CA06362" Association="BD_B45818Model.FK__Telefono__Cedula__4CA06362">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Telefono" EntitySet="Telefono" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="BD_B45818Model.FK__Cliente__Usuario__49C3F6B7" FromRole="AspNetUsers" ToRole="Cliente" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="Cedula" />
@@ -101,8 +161,10 @@
           <Property Name="Apellido2" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Correo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cuenta" Relationship="BD_B45818Model.FK__Cuenta__Cedula__2C3393D0" FromRole="Cliente" ToRole="Cuenta" />
-          <NavigationProperty Name="Telefono" Relationship="BD_B45818Model.FK__Telefono__Cedula__29572725" FromRole="Cliente" ToRole="Telefono" />
+          <Property Name="Usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="BD_B45818Model.FK__Cliente__Usuario__49C3F6B7" FromRole="Cliente" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Cuenta" Relationship="BD_B45818Model.FK__Cuenta__Cedula__4F7CD00D" FromRole="Cliente" ToRole="Cuenta" />
+          <NavigationProperty Name="Telefono" Relationship="BD_B45818Model.FK__Telefono__Cedula__4CA06362" FromRole="Cliente" ToRole="Telefono" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -112,7 +174,7 @@
           <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cliente" Relationship="BD_B45818Model.FK__Cuenta__Cedula__2C3393D0" FromRole="Cuenta" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente" Relationship="BD_B45818Model.FK__Cuenta__Cedula__4F7CD00D" FromRole="Cuenta" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="Telefono">
           <Key>
@@ -121,9 +183,23 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cliente" Relationship="BD_B45818Model.FK__Telefono__Cedula__29572725" FromRole="Telefono" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente" Relationship="BD_B45818Model.FK__Telefono__Cedula__4CA06362" FromRole="Telefono" ToRole="Cliente" />
         </EntityType>
-        <Association Name="FK__Cuenta__Cedula__2C3393D0">
+        <Association Name="FK__Cliente__Usuario__49C3F6B7">
+          <End Type="BD_B45818Model.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="BD_B45818Model.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__Cedula__4F7CD00D">
           <End Type="BD_B45818Model.Cliente" Role="Cliente" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -137,7 +213,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Telefono__Cedula__29572725">
+        <Association Name="FK__Telefono__Cedula__4CA06362">
           <End Type="BD_B45818Model.Cliente" Role="Cliente" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -157,9 +233,28 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BD_B45818ModelStoreContainer" CdmEntityContainer="BD_B45818Entities3">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BD_B45818Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="BD_B45818Model.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />

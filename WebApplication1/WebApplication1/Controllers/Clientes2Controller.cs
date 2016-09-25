@@ -62,7 +62,19 @@ namespace WebApplication1.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            ModeloIntermedio modelo = new ModeloIntermedio();
+
+            var usuarios = baseDatos.AspNetUsers.ToList();
+
+            IEnumerable<SelectListItem> selectList = from s in usuarios
+                                                     select new SelectListItem
+                                                     {
+                                                         Text = s.Email,
+                                                         Value = s.Email
+                                                     };
+            modelo.clienteList = selectList;
+
+            return View(modelo);
         }
 
         [HttpPost]
@@ -71,6 +83,7 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                modelo.modeloCliente.AspNetUsers = baseDatos.AspNetUsers.Where(m => m.Email == modelo.clienteSelect).FirstOrDefault();
                 baseDatos.Cliente.Add(modelo.modeloCliente);
                 baseDatos.SaveChanges();
                 if (modelo.modeloTelefono1.Numero != null)
@@ -98,6 +111,7 @@ namespace WebApplication1.Controllers
                     modelo.modeloCuenta3.Cedula = modelo.modeloCliente.Cedula;
                     baseDatos.Cuenta.Add(modelo.modeloCuenta3);
                 }
+
                 baseDatos.SaveChanges();
                 return RedirectToAction("Index");
             }

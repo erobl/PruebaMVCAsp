@@ -25,6 +25,7 @@ namespace WebApplication1.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
         public virtual DbSet<Telefono> Telefono { get; set; }

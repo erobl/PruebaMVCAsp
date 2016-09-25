@@ -208,6 +208,9 @@
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>ClienteModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>ClienteModelo.tt</DependentUpon>
     </Compile>

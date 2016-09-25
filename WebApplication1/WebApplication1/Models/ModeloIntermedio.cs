@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace WebApplication1.Models
 {
@@ -17,6 +18,9 @@ namespace WebApplication1.Models
         public List<Cliente> listaClientes = new List<Cliente>();
         public List<Telefono> listaTelefonos = new List<Telefono>();
         public List<Cuenta> listaCuenta = new List<Cuenta>();
+
+        public IEnumerable<SelectListItem> clienteList { get; set; }
+        public string clienteSelect { get; set; }
     }
 
 }
