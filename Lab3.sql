@@ -53,3 +53,4 @@ CREATE TABLE Rol_de_usuario (
 Insert into dbo.AspNetRoles values(1, 'Administrador');
 Insert into dbo.AspNetRoles values(2, 'Lider');
 Insert into dbo.AspNetRoles values(3, 'Usuario');
+
