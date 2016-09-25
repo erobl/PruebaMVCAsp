@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
+using System.Collections.Generic;
 
 namespace WebApplication1.Controllers
 {
@@ -17,6 +18,7 @@ namespace WebApplication1.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private BD_B45818Entities5 dataBase = new BD_B45818Entities5();
 
         public AccountController()
         {
@@ -139,7 +141,20 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            ModeloRegistrar model = new ModeloRegistrar();
+
+            var roles = dataBase.Rols.ToList();
+
+            IEnumerable<SelectListItem> selectList = from s in roles
+                                                     select new SelectListItem
+                                                     {
+                                                         Text = s.Rol1,
+                                                         Value = s.Rol1
+                                                     };
+
+            model.rolList = selectList;
+
+            return View(model);
         }
 
         //
@@ -147,15 +162,25 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(ModeloRegistrar model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.usuario.Email, Email = model.usuario.Email };
+                var result = await UserManager.CreateAsync(user, model.usuario.Password);
+                
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    var currentUser = UserManager.FindByName(user.UserName);
+
+                    Rol user_role = dataBase.Rols.Find(model.rolSelect);
+                    AspNetUser userAsp = dataBase.AspNetUsers.Where(m => m.Email == model.usuario.Email).FirstOrDefault();
+                    user_role.AspNetUsers.Add(userAsp);
+                    dataBase.Rols.Attach(user_role);
+                    dataBase.Entry(user_role).State = System.Data.Entity.EntityState.Modified;
+                    dataBase.SaveChanges();
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
