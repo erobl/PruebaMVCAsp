@@ -8,19 +8,25 @@ CREATE TABLE Cliente  (
 )
 
 CREATE TABLE Telefono (
+	ID int IDENTITY(1,1) PRIMARY KEY,
 	Numero Varchar(20),
 	Cedula Varchar(15)
 
-	FOREIGN KEY (Cedula) REFERENCES Cliente(Cedula),
-	PRIMARY KEY(Cedula, Numero),
+	FOREIGN KEY (Cedula) REFERENCES Cliente(Cedula)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
 )
 
 CREATE TABLE Cuenta (
+	ID int IDENTITY(1,1) PRIMARY KEY,
 	Tipo Varchar(20),
 	Numero Varchar(20),
 	Cedula Varchar(15),
-	FOREIGN KEY (Cedula) REFERENCES Cliente(Cedula),
-	PRIMARY KEY(Cedula, Numero)
+	FOREIGN KEY (Cedula) REFERENCES Cliente(Cedula)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
 )
+
+CREATE TABLE Rol
 
 DROP TABLE Cliente, Cuenta, Telefono

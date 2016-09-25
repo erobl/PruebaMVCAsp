@@ -325,6 +325,7 @@
     <Content Include="Views\Clientes2\Create.cshtml" />
     <Content Include="Views\Clientes2\Edit.cshtml" />
     <Content Include="Views\Clientes2\Details.cshtml" />
+    <Content Include="Views\Clientes2\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

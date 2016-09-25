@@ -19,6 +19,7 @@
           <ScalarProperty Name="Cedula" ColumnName="Cedula" />
           <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -27,6 +28,7 @@
         <MappingFragment StoreEntitySet="Telefono">
           <ScalarProperty Name="Cedula" ColumnName="Cedula" />
           <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

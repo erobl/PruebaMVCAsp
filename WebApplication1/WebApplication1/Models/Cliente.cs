@@ -11,7 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +20,7 @@ namespace WebApplication1.Models
             this.Cuenta = new HashSet<Cuenta>();
             this.Telefono = new HashSet<Telefono>();
         }
-
-        [Required(ErrorMessage = "La cédula es un campo requerido.")]
+    
         public string Cedula { get; set; }
         public string Nombre { get; set; }
         public string Apellido1 { get; set; }

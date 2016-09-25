@@ -13,23 +13,25 @@
   </EntityType>
   <EntityType Name="Cuenta">
     <Key>
-      <PropertyRef Name="Numero" />
-      <PropertyRef Name="Cedula" />
+      <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Tipo" Type="varchar" MaxLength="20" />
-    <Property Name="Numero" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Cedula" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Numero" Type="varchar" MaxLength="20" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" />
   </EntityType>
   <EntityType Name="Telefono">
     <Key>
-      <PropertyRef Name="Numero" />
-      <PropertyRef Name="Cedula" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Numero" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Cedula" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Numero" Type="varchar" MaxLength="20" />
+    <Property Name="Cedula" Type="varchar" MaxLength="15" />
   </EntityType>
-  <Association Name="FK__Cuenta__Cedula__48CFD27E">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+  <Association Name="FK__Cuenta__Cedula__2C3393D0">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cliente">
@@ -40,8 +42,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Telefono__Cedula__45F365D3">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+  <Association Name="FK__Telefono__Cedula__29572725">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cliente">
@@ -56,11 +60,11 @@
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Cuenta__Cedula__48CFD27E" Association="Self.FK__Cuenta__Cedula__48CFD27E">
+    <AssociationSet Name="FK__Cuenta__Cedula__2C3393D0" Association="Self.FK__Cuenta__Cedula__2C3393D0">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Cuenta" EntitySet="Cuenta" />
     </AssociationSet>
-    <AssociationSet Name="FK__Telefono__Cedula__45F365D3" Association="Self.FK__Telefono__Cedula__45F365D3">
+    <AssociationSet Name="FK__Telefono__Cedula__29572725" Association="Self.FK__Telefono__Cedula__29572725">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Telefono" EntitySet="Telefono" />
     </AssociationSet>

@@ -57,13 +57,8 @@ new { @class = "text-danger" })
             @Html.LabelFor(model => model.modeloCliente.Cedula, htmlAttributes: new
        { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.modeloCliente.Cedula, new
-           {
-               htmlAttributes
-= new { @class = "form-control" }
-           })
-                @Html.ValidationMessageFor(model => model.modeloCliente.Cedula, "",
-new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.modeloCliente.Cedula)
+                @Html.HiddenFor(model => model.modeloCliente.Cedula)
             </div>
         </div>
         <div class="form-group">
@@ -95,6 +90,8 @@ new { @class = "control-label col-md-2" })
         <div class="form-group">
             <label class="control-label col-md-2">Telefono 1:</label>
             <div class="col-md-10">
+                @Html.HiddenFor(model => model.modeloTelefono1.ID)
+
                 @Html.EditorFor(model => model.modeloTelefono1.Numero, new
            {
                htmlAttributes = new { @class = "form-control" }
@@ -106,6 +103,7 @@ new { @class = "control-label col-md-2" })
         <div class="form-group">
             <label class="control-label col-md-2">Telefono 2:</label>
             <div class="col-md-10">
+                @Html.HiddenFor(model => model.modeloTelefono2.ID)
                 @Html.EditorFor(model => model.modeloTelefono2.Numero, new
            {
                htmlAttributes = new { @class = "form-control" }
@@ -115,8 +113,9 @@ new { @class = "control-label col-md-2" })
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2">Telefono 1:</label>
+            <label class="control-label col-md-2">Cuenta de Banco 1:</label>
             <div class="col-md-10">
+                @Html.HiddenFor(model => model.modeloCuenta1.ID)
                 @Html.EditorFor(model => model.modeloCuenta1.Numero, new
            {
                htmlAttributes = new { @class = "form-control" }
@@ -126,8 +125,20 @@ new { @class = "control-label col-md-2" })
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2">Telefono 2:</label>
+            <label class="control-label col-md-2">Tipo de Cuenta de Banco 1:</label>
             <div class="col-md-10">
+                @Html.EditorFor(model => model.modeloCuenta1.Tipo, new
+           {
+               htmlAttributes = new { @class = "form-control" }
+           })
+                @Html.ValidationMessageFor(model => model.modeloCuenta1.Tipo,
+"", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Cuenta de Banco 2:</label>
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.modeloCuenta2.ID)
                 @Html.EditorFor(model => model.modeloCuenta2.Numero, new
            {
                htmlAttributes = new { @class = "form-control" }
@@ -137,8 +148,42 @@ new { @class = "control-label col-md-2" })
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-md-2">Tipo de Cuenta de Banco 2:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.modeloCuenta2.Tipo, new
+           {
+               htmlAttributes = new { @class = "form-control" }
+           })
+                @Html.ValidationMessageFor(model => model.modeloCuenta2.Tipo,
+"", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Cuenta de Banco 3:</label>
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.modeloCuenta3.ID)
+                @Html.EditorFor(model => model.modeloCuenta3.Numero, new
+           {
+               htmlAttributes = new { @class = "form-control" }
+           })
+                @Html.ValidationMessageFor(model => model.modeloCuenta3.Numero,
+"", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Tipo de Cuenta de Banco 3:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.modeloCuenta3.Tipo, new
+           {
+               htmlAttributes = new { @class = "form-control" }
+           })
+                @Html.ValidationMessageFor(model => model.modeloCuenta3.Tipo,
+"", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Edit" class="btn btn-default" />
             </div>
         </div>
     </div>

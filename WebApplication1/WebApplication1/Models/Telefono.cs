@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class Telefono
     {
+        public int ID { get; set; }
         public string Numero { get; set; }
         public string Cedula { get; set; }
     

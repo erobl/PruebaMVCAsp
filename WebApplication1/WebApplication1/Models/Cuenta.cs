@@ -14,6 +14,7 @@ namespace WebApplication1.Models
     
     public partial class Cuenta
     {
+        public int ID { get; set; }
         public string Tipo { get; set; }
         public string Numero { get; set; }
         public string Cedula { get; set; }
